@@ -1,0 +1,386 @@
+\documentclass{beamer}
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm]
+\usepackage[utf8]{inputenc}
+\usepackage[serbianc]{babel}
+\usepackage{textgreek}
+\usepackage{pgfpages}
+
+\usetheme{Boadilla}
+\usecolortheme[named=orange]{structure}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[final]{pdfpages}
+\usepackage{xcolor}
+
+\usepackage{listings}
+
+
+
+\useoutertheme[footline=authortitle]{miniframes}
+
+\title[Програмски језик C - основи]{\color{black}\smallУвод у \\\color{orange}\normalsizeПрограмски језик C}
+\vspace{-4cm}\author{Александар Пајкановић}
+\titlegraphic{\includegraphics[width=2cm]{logo}}
+
+%\titlegraphic{\includegraphics[width=2cm]{logo}%\hspace{10.75cm}%
+
+%}
+\institute{\texttt{nanoluka.org}\\
+YouTube.com/nanoluka\\
+instagram.com/nanolukaorg\\
+twitter.com/nanolukaorg\\
+github.com/nanoluka\\
+\texttt{nanolukaorg@gmail.com}}
+
+\date{\color{orange}Октобар 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Кориштење овог документа}
+\begin{itemize}
+    \item \textbf{Лиценца}: 
+    \begin{itemize}
+        \item Документ објављујем под лиценцом \color{orange}\href{https://creativecommons.org/licenses/by-sa/4.0//legalcode}{\textit{Attribution-ShareAlike — CC BY-СА}}\color{black}. Ова лиценца дозвољава ремикс и прераду, као и комерцијално кориштење дјела, ако/док се \textbf{правилно назначава име аутора} и ако се \textbf{прерада лиценцира под истим условима}. Ова лиценца се често упоређује са „\textit{copyleft}” лиценцирањем слободног софтвера или софтвера отвореног к\^{о}да. Сва дјела настала на основу дјела лиценцираног овом лиценцом, требало би да буду лиценцирана истом лиценцом, која, поред осталог, дозвољава комерцијално кориштење.
+    \end{itemize}
+    \item \textbf{Навођење (цитирање)}: 
+    \begin{itemize}
+        \item Ако сте користили овај документ као извор у сопственим материјалима, молим да цитирате на сљедећи начин: А. Пајкановић, ,,Увод у програмски језик \textit{C} кроз практчне примјере'', доступно на \color{orange}\href{github.com/nanoluka/jezik-c.git}{github.com/nanoluka/jezik-c.git}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Програмирање и програмски језици}
+\begin{itemize}
+    \item Рачунар у општем смислу је машина способна да изврши било који алгоритам пратећи дефинисан скуп правила - ткз. Тјурингова машина (теоријска замисао).
+    \item Алгоритам је недвосмислен метод рјешавања конкретног проблема
+    \item Рачунар се већ читав вијек састоји од процесора и меморије - ткз. Фон Нојманова архитектура (реализација)
+    \item Програмирање, у практичном смислу, можемо рећи да представља састављање текстуалног (понегдје и графичког) описа жељеног понашања рачунара у смислу обраде корисничких података и представљања резултата тог процеса кориснику
+    \item Програмски језик је скуп инструкција (кључних ријечи) које, ако су посложене у складу са унапријед дефинисаним правилима, рачунар може да прихвати - при чему ово ,,прихвати'' значи да је у стању да, узев дате податке корисника на улазу, кориснику прикаже очекивани излаз
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Програмски језик C}
+\begin{itemize}
+    \item Постоји много подјела програмских језика, најважнија је на:
+    \begin{itemize}
+        \item језике вишег нивоа, и
+        \item језике нижег нивоа
+    \end{itemize}
+    \item \textit{C} спада у језик вишег нивоа. Генерално, сви програмски језици за које сте чули су, у ствари, у истој групи. Ова друга група своди се на машински, тј. асемблер - о том потом, неки други пут.
+    \item Друга важна подјела је према парадигми којој програмски језик припада, тренутно су актуелне четири парадигме (које се, често, међусобно пресјецају):
+    \begin{itemize}
+        \item императивно програмирање,
+        \item функционално,
+        \item логичко, и
+        \item објектно оријентисано.
+    \end{itemize}
+    \item Наш данашњи језик спада у прву групу, а његов млађи брат \textit{C++} у посљедњу.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Програмски језик C}
+\begin{itemize}
+    \item Иначе, \textit{C} је насљедник програмског језика \textit{B} (гле чуда), настао је почетком 70их у Бел Лабораторијама, човјек се звао Денис Ричи.
+    \item Најважније карактеристике су веома ефикасан превод у асемблерске инструкције, писан је за извршавање на различитим платформама, брзина извршавања, велика слобода, па је зато веома распрострањен - данас највише у домену програмирања уграђених система.
+    \item С друге стране, за разлику од пајтона, на примјер, који је можда најраспрострањенији на планети, крива учења је ипак нешто стрмија.
+    \item Укратко, поступак од идеје до реализације састоји се од пет корака.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Програмски језик C}
+\begin{itemize}
+    \item Укратко, поступак од идеје до реализације састоји се од пет корака:
+    \begin{enumerate}
+        \item алгоритам,
+        \item псеудо к\^{о}д,
+        \item изворни к\^{о}д - овдје се пише синтакса (\texttt{.c}),
+        \item компајлирањем добијамо објектни к\^{о}д (\texttt{.obj}), и
+        \item линкер нам даје реализацију, ткз. извршни к\^{о}д, односно извршну датотеку (\texttt{.exe})
+    \end{enumerate}
+    \item На том путу, сусрећемо се са разним невољама, а подијелићемо их у грешксе:
+    \begin{itemize}
+        \item синтаксичке, и
+        \item семантичке.
+    \end{itemize}
+    \item Ова презентација не представља потпуне информације о рачунарима, програмирању и програмском језику \textit{C}, него служи као увод или преглед, како бисмо се упознали са основама и знали гдје и шта да тражимо како бисмо стварно научили.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Потребни алати}
+\begin{itemize}
+    \item Рачунар - бар током овог предавања, али може и телефон или таблет - само је унос проблематичан
+    \item \textit{Windows} оперативни систем - може, наравно, и неки други али данас рад демонстрирамо овако
+    \item \textit{Dev C++} - интегрисано развојно окружење (енгл. \textit{IDE}), потпун алат и лак за инсталацију и кориштење, бесплатно доступан на \color{orange}\href{https://sourceforge.net/projects/orwelldevcpp/}{https://sourceforge.net/projects/orwelldevcpp/}
+    \item \color{black}\textit{Arduino} - интегрисано развојно окружење за рад са Ардуино платформом, пакет са свим потенцијалним додацима доступан на: \color{orange}\href{https://www.arduino.cc/}{https://www.arduino.cc/}\color{black}
+    \item Познавање енглеског језика
+    \item Добра воља, чврста одлука да се не одустаје и упоран рад
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 1 - Испис текста}
+\begin{block}{HelloICBL}
+\begin{lstlisting}
+#include <stdio.h>
+int main() {
+
+   // printf() displays the string inside quotation
+   printf("Hello, ICBL!");
+   return 0;
+}
+\end{lstlisting}
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Типови података}
+\begin{itemize}
+    \item Основна подјела сигнала:
+    \begin{itemize}
+        \item аналогни - звук, бежични пренос података, зрачење, слика
+        \item дигитални - запис аналогних, али користећи само ограничен број нивоа - ако су само два нивоа, онда су то бинарни сигнали
+    \end{itemize}
+    \item Данашњи комерцијално доступни рачунари су дигитални и разумију искључиво бинарне податке
+    \item Математички запис је дат прије два вијека, данас познат као бинарна или Булова алгебра
+    \item Једна бинарна цифра назива се бит (енгл. \textit{binary digit} $\rightarrow$ \textit{bit})
+    \item Осам бита је бајт (енгл. \textit{byte}), kilo, mega, итд.
+    \item Подаци су осмобитни, 32-битни, итд.
+    \item Корисни записи су још и октални и хексадецимални
+    \item Децимални број 6, осмобитно се представља као \texttt{00000110}, број 126 пишемо \texttt{01111110}, а -126 je \texttt{10000010}
+    \item Означенио и неозначени
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 2 - Типови података}
+\begin{block}{DataTypes}
+\begin{lstlisting}
+#include <stdio.h>      
+int main() {
+  int a;
+  long b;
+  char c;
+  float d;
+
+  printf("size of int = %d bytes\n", sizeof(a));
+  printf("size of short = %d bytes\n", sizeof(b));
+  printf("size of char = %d bytes\n", sizeof(c));
+  printf("size of float = %d bytes\n", sizeof(d));
+  return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 3 - Аритметичке и логичке операције}
+\begin{block}{ALU}
+\begin{lstlisting}
+  int a = 2;
+  int b = 4;
+  char c = 'a';
+  float d = 6.2;
+
+  printf("zbir: a+b = %d\n", a+b);
+  printf("razlika: a-b = %d\n", a-b);
+  printf("proizvod: a*c = %d\n", a*c);
+  printf("kolicnik - cjelobrojno: a/b= %f\n", a/b);
+  printf("kolicnik - decimalno: a/d= %f\n", a/b);
+  printf("jednakost: a == b = %d\n", a==b);
+  printf("binarno I: a & b = %d\n", a & b);
+  printf("logicko I: a && b = %d\n", a && b);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}{Контрола т\^{о}ка}
+\begin{itemize}
+    \item Рачунари не одлучују. Бар не још увијек
+    \item Рачунари поступају по инструкцијама
+    \item Инструкција може да се изврши или не изврши у зависности од услова, односно може да се изврши једна или друга, опет, наравно, зависно од стања нечег другог:
+    \begin{itemize}
+        \item ако је температура већа од 22$^o$ C, искључи гријање
+        \item ако је температура мања од 18$^o$ C, укључи гријање
+        \item не извршавај ништа, док се не притисне овај тастер
+        \item изврши сабирање свих бројева у овом низу, тј. 10 000 сабирања
+    \end{itemize}
+    \item Графички приказ т\^{о}ка извршавања назива се дијаграм т\^{о}ка
+    \item Т\^{о}к контролишемо користећи се гранањем (\texttt{if-else, switch}) и петљама (\texttt{for, while, do-while})
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 4 - Унос података}
+\begin{block}{DataInput}
+\begin{lstlisting}
+#include <stdio.h>
+int main()
+{
+    int a;
+    printf("Unesite broj: ");
+    scanf("%d", &a);  
+    
+    printf("Broj je = %d", a);
+    return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 5 - Гранање}
+\begin{block}{Branch}
+\begin{lstlisting}
+    int a;
+    printf("Unesite broj: ");
+    scanf("%d", &a);  
+    
+    if (a > 9) {
+        printf("Broj %d je dvocifren", a);}
+    else if (a > 100) {
+        printf("Broj %d je trocifren", a);}
+    else {
+        printf("Broj %d je jednocifren", a);}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 6 - Петља}
+\begin{block}{Loop}
+\begin{lstlisting}
+    int a;
+    int f = 1;
+    printf("Unesite broj: ");
+    scanf("%d", &a);  
+    
+    int i;
+    for(i = 0; i<a; i++){
+        printf("Ispisujem %d. put\n", i);
+        f = f * (i+1);
+        }
+    printf("Faktorijel broja %d je: %d\n", a, f);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}{Енкапсулација и апстракција}
+\begin{itemize}
+    \item Тако далеко сам видио, зато што сам стојао сам на плећима дивова
+    \item Све што постоји, а да је створено људском руком, настало је комбинацијом већ постојећег
+    \item Зашто да измишљамо топлу воду?
+    \item Дајте ми полугу, помјерићу свијет
+    \item Право питање је: шта је проблем?
+    \item Видјели смо који су типови података, видјели смо које су доступне аритметичке операције.
+    \item Како ћемо израчунати коријен? Експонент? Синус? Интеграл?
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 7 - Кориштење библиотека}
+\begin{block}{Library / Lib}
+\begin{lstlisting}
+#include <math.h>
+#include <stdio.h>
+
+int main() {
+    float a = 3, e = 4, r = 0;
+
+    // calculates the power
+    r = pow(a, e);
+
+    printf("%.1lf^%.1lf = %.2lf", a, e, r);
+    return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 8 - Писање функција}
+\begin{block}{Function}
+\begin{lstlisting}
+#include <stdio.h>
+float stepen(float x, float y) {
+    int i;
+    float r = 1;
+    for(i = 1; i <= y; i++) {
+        r = r * x; }
+    return r; }
+int main() {
+    float a = 3, e = 4, r = 0;
+    r = stepen(a, e);
+    printf("%.1lf^%.1lf = %.2lf", a, e, r);
+    return 0; }
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}{Уграђени (енгл. \textit{embedded}) системи}
+\begin{itemize}
+    \item Уграђени системи су рачунарски системи намијењени за извршавање специфичне функције у реалном времену, и могу да буду сасставни дио обимнијих електромеханичких (над)система.
+    \item Рачунари су, на примјер, системи опште намјене, дакле нису ,,уграђени'' у овом смислу.
+    \item Махом су дигитални, а централни дио је увијек микроконтролер.
+    \item Микроконтролер је процесор са периферијама и (малом) меморијом.
+    \item Internet of Things - интернет свега, паметни системи
+    \item Аутомобилска индустрија (енгл. \textit{automotive})
+    \item Интересантан свијет, на граници између хардвера и софтвера, рачунарска електроника, рачунарски инжењеринг, мехатроника, роботика.
+    \item Ардуино је сјајан први корак на том путу.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 9 - Трепћући Ардуино}
+\begin{block}{Blink}
+\begin{lstlisting}
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);     //izlazni
+}
+void loop() /*PETLJA*/ {
+  digitalWrite(LED_BUILTIN, HIGH);  //VISOK nivo
+  delay(1000);                      //sacekaj
+  digitalWrite(LED_BUILTIN, LOW);   //NIZAK nivo
+  delay(1000);                      //sackeaj
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 10 - Зглоб једног робота}
+\begin{block}{Motor}
+\begin{lstlisting}
+digitalWrite(smjer,HIGH); // Izbor smjera rotacije
+for(int x = 0; x < 200; x++) {
+    digitalWrite(stepPin,HIGH); 
+    delayMicroseconds(500); 
+    digitalWrite(stepPin,LOW); 
+    delayMicroseconds(500); }
+delay(1000); // Sacekaj jednu sekundu
+digitalWrite(smjer,LOW); // Promjena smjera rotacije
+for(int x = 0; x < 400; x++) {
+    digitalWrite(stepPin,HIGH);
+    delayMicroseconds(500);
+    digitalWrite(stepPin,LOW);
+    delayMicroseconds(500); }
+ 
+ delay(1000); // Sacekaj opet
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}{Референце}
+\begin{itemize}
+    \item \color{orange}\href{https://www.google.com/}{Google}!!!
+    \item \color{orange}\href{https://skolakoda.github.io/kursevi/ucimo-c/}{Увод у програмирање кроз \textit{C}}, \color{black} Школа к\^{o}да
+    \item \color{orange}\href{https://www.programiz.com/}{Programiz}
+    \item \color{orange}\href{https://www.coursera.org/}{Coursera} \color{black}и \color{orange}\href{https://www.edx.org/}{edX}
+    \item \color{orange}\href{http://uticnionica.etf.unibl.org/}{Утичнионица}\color{black} - основно о Ардуину, са Електротехничког факултета у Бањој Луци
+    \item Упутство за рад са \textit{CNC} наставком за Ардуино, \color{orange}\href{https://www.youtube.com/watch?v=TMK_fLgpESQ}{видео} \color{black}и \color{orange}\href{https://www.electroniclinic.com/arduino-cnc-shield-v3-0-and-a4988-hybrid-stepper-motor-driver-joystick/}{текст}
+    \item \color{orange}\href{http://1000zabuducnost.org/}{1000 за будућност}\color{black} - увод у рад са:
+    \begin{itemize}
+        \item Пи рачунар
+        \item програмски језик \textit{Python}
+    \end{itemize}
+    \item Званична презентација \color{orange}\href{https://www.raspberrypi.org/}{\textit{Raspberry Pi}}\color{black}
+    \item Увод у електронику - серија \color{orange}\href{https://www.youtube.com/playlist?list=PLh-StTZA7RZ6Ch6Esin2mnoPzFvLZOYu3}{Три минута електронике}
+    \item \href{https://www.nanoluka.org}{Књига о LTspice}\color{black}, софтверском симулатору електричних кола
+\end{itemize}
+\end{frame}
+
+\end{document}
